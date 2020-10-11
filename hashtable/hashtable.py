@@ -21,7 +21,9 @@ class HashTable:
     """
 
     def __init__(self, capacity):
-        # Your code here
+        self.capacity = capacity
+        self.table = [None] * self.capacity
+        self.count = 0
 
 
     def get_num_slots(self):
@@ -34,7 +36,7 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        return len(self.table)
 
 
     def get_load_factor(self):
@@ -57,12 +59,12 @@ class HashTable:
 
 
     def djb2(self, key):
-        """
-        DJB2 hash, 32-bit
+        
+        hash_code = 5381
 
-        Implement this, and/or FNV-1.
-        """
-        # Your code here
+        for keys in key:
+            hash_code = ((hash_code << 5) + hash_code) + ord(keys)
+        return hash_code    
 
 
     def hash_index(self, key):
