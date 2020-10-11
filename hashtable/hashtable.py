@@ -51,7 +51,6 @@ class HashTable:
     def fnv1(self, key):
         """
         FNV-1 Hash, 64-bit
-
         Implement this, and/or DJB2.
         """
 
@@ -59,12 +58,10 @@ class HashTable:
 
 
     def djb2(self, key):
-        
         hash_code = 5381
-
         for keys in key:
             hash_code = ((hash_code << 5) + hash_code) + ord(keys)
-        return hash_code    
+        return hash_code   
 
 
     def hash_index(self, key):
@@ -78,12 +75,13 @@ class HashTable:
     def put(self, key, value):
         """
         Store the value with the given key.
-
         Hash collisions should be handled with Linked List Chaining.
-
         Implement this.
         """
-        # Your code here
+        hashed_key = self.djb2(key)
+        self.table[self.hash_index(key)] = value
+
+        return self.table 
 
 
     def delete(self, key):
@@ -100,12 +98,11 @@ class HashTable:
     def get(self, key):
         """
         Retrieve the value stored with the given key.
-
         Returns None if the key is not found.
-
         Implement this.
         """
-        # Your code here
+        return self.hash_index(key)
+    
 
 
     def resize(self, new_capacity):
@@ -153,3 +150,18 @@ if __name__ == "__main__":
         print(ht.get(f"line_{i}"))
 
     print("")
+
+
+Key = 'Ernesto Pena'
+new_hash = HashTable(10)
+
+
+
+new_hashed_key = new_hash.djb2(Key)
+
+print('The djb2 hash for' , Key , 'is' , new_hashed_key)
+
+print('PUT Method for ', Key , 'is' , new_hash.put('Ernesto Pena', '43 years old'))
+
+
+print('Location for', Key, 'is', new_hash.get(Key))
